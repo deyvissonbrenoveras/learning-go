@@ -3,5 +3,9 @@ package inventory
 import "inventory-management/products"
 
 func AddProduct(product products.Product) {
-	append(storedProducts, product)
+	storedProducts = append(storedProducts, product)
+}
+
+func GetAllProducts() []products.Product {
+	return storedProducts
 }
