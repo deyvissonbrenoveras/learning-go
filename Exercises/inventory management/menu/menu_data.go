@@ -5,6 +5,7 @@ var menuText = `1. Add Product
 3. Delete Product
 4. Show Inventory
 5. Calculate Total Value
-6. Quit
+6. Start Sale
+7. Quit
 
 Choose an option: `

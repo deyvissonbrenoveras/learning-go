@@ -27,6 +27,8 @@ loop:
 		case 5:
 			getInventorySummary()
 		case 6:
+			startSales()
+		case 7:
 			menu.ClearConsole()
 			fmt.Println("Quitting Inventory Management System")
 			break loop
@@ -88,6 +90,7 @@ func showInventory() {
 			fmt.Printf("Id: %s\n", product.Id)
 			fmt.Printf("Name: %s\n", product.Name)
 			fmt.Printf("Price: %.2f\n", product.Price)
+			fmt.Printf("Inventory quantity: %d\n", product.InventoryQuantity)
 		}
 		fmt.Println(separator)
 	} else {
@@ -102,4 +105,9 @@ func getInventorySummary() {
 	fmt.Println("\nInventory summary: \n")
 	fmt.Printf("Product count: %d\nProducts total price: R$ %.2f\n\n", productCount, totalValue)
 	fmt.Println(separator)
+}
+
+func startSales() {
+	menu.ClearConsole()
+
 }

@@ -46,6 +46,19 @@ func GetProductInputFromUser() (products.Product, error) {
 	product.Price = float32(price)
 
 	ClearConsole()
+	fmt.Print("Type the product available quantity: ")
+	input, err = readUserInput()
+	if err != nil {
+		return product, fmt.Errorf("an error has occurred while reading product available quantity: %v", err)
+	}
+	inventoryQuantity, err := strconv.ParseInt(input, 10, 32)
+	if err != nil {
+		return product, errors.New("an error has occurred while reading product price: invalid price")
+	}
+	if inventoryQuantity < 1 {
+		return product, errors.New("inventory quantity must be greater than 0")
+	}
+	product.InventoryQuantity = int32(inventoryQuantity)
 	return product, nil
 
 }
