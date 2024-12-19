@@ -1,9 +1,10 @@
 package menu
 
 var menuText = `1. Add Product
-2. Update Inventory
-3. Show Inventory
-4. Calculate Total Value
-5. Quit
+2. Update Product
+3. Delete Product
+4. Show Inventory
+5. Calculate Total Value
+6. Quit
 
 Choose an option: `

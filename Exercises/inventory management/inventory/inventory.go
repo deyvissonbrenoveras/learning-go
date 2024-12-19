@@ -3,6 +3,7 @@ package inventory
 import (
 	"fmt"
 	"inventory-management/products"
+	"slices"
 )
 
 func AddProduct(product products.Product) error {
@@ -23,6 +24,16 @@ func UpdateProduct(product products.Product) error {
 		}
 	}
 	return fmt.Errorf(`product with id %s not found`, product.Id)
+}
+
+func DeleteProduct(id string) error {
+	for i, prod := range storedProducts {
+		if prod.Id == id {
+			storedProducts = slices.Delete(storedProducts, i, i+1)
+			return nil
+		}
+	}
+	return fmt.Errorf(`product with id %s not found`, id)
 }
 
 func GetAllProducts() []products.Product {

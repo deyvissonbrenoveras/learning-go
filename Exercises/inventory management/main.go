@@ -21,10 +21,12 @@ loop:
 		case 2:
 			updateInventory()
 		case 3:
-			showInventory()
+			deleteProduct()
 		case 4:
-			getInventorySummary()
+			showInventory()
 		case 5:
+			getInventorySummary()
+		case 6:
 			menu.ClearConsole()
 			fmt.Println("Quitting Inventory Management System")
 			break loop
@@ -60,17 +62,38 @@ func updateInventory() {
 	fmt.Printf("Product updated: %+v\n\n", product)
 }
 
+func deleteProduct() {
+	id, err := menu.ReadProductId()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = inventory.DeleteProduct(id)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("Product with id %s was deleted successfully\n\n", id)
+}
+
 func showInventory() {
 	products := inventory.GetAllProducts()
 
-	for index, product := range products {
+	if len(products) > 0 {
+		menu.ClearConsole()
+		fmt.Println("Inventory list:\n\n")
+		for index, product := range products {
+			fmt.Println(separator)
+			fmt.Printf("Product %d\n", index+1)
+			fmt.Printf("Id: %s\n", product.Id)
+			fmt.Printf("Name: %s\n", product.Name)
+			fmt.Printf("Price: %.2f\n", product.Price)
+		}
 		fmt.Println(separator)
-		fmt.Printf("Product %d\n", index+1)
-		fmt.Printf("Id: %s\n", product.Id)
-		fmt.Printf("Name: %s\n", product.Name)
-		fmt.Printf("Price: %.2f\n", product.Price)
+	} else {
+		fmt.Println("No prodcuts found...\n")
 	}
-	fmt.Println(separator)
+
 }
 
 func getInventorySummary() {

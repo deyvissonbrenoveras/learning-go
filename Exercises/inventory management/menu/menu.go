@@ -73,6 +73,18 @@ func getMenuOptionFromUser() (int, error) {
 	return selectedNumber, nil
 }
 
+func ReadProductId() (id string, err error) {
+	ClearConsole()
+	fmt.Print("Please, type the product ID to delete: ")
+	id, err = readUserInput()
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	ClearConsole()
+	return id, nil
+}
+
 func readUserInput() (string, error) {
 	input, err := reader.ReadString('\n')
 	input = strings.TrimSpace(input)
