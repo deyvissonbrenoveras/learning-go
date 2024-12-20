@@ -4,10 +4,7 @@ import (
 	"fmt"
 	"inventory-management/inventory"
 	"inventory-management/menu"
-	"strings"
 )
-
-var separator = strings.Repeat("-", 20)
 
 func main() {
 	fmt.Println("Inventory management system\n")
@@ -85,14 +82,14 @@ func showInventory() {
 		menu.ClearConsole()
 		fmt.Println("Inventory list:\n\n")
 		for index, product := range products {
-			fmt.Println(separator)
+			menu.PrintSeparator()
 			fmt.Printf("Product %d\n", index+1)
 			fmt.Printf("Id: %s\n", product.Id)
 			fmt.Printf("Name: %s\n", product.Name)
 			fmt.Printf("Price: %.2f\n", product.Price)
 			fmt.Printf("Inventory quantity: %d\n", product.InventoryQuantity)
 		}
-		fmt.Println(separator)
+		menu.PrintSeparator()
 	} else {
 		fmt.Println("No prodcuts found...\n")
 	}
@@ -101,13 +98,13 @@ func showInventory() {
 
 func getInventorySummary() {
 	totalValue, productCount := inventory.GetInventorySummary()
-	fmt.Println(separator)
+	menu.PrintSeparator()
 	fmt.Println("\nInventory summary: \n")
 	fmt.Printf("Product count: %d\nProducts total price: R$ %.2f\n\n", productCount, totalValue)
-	fmt.Println(separator)
+	menu.PrintSeparator()
 }
 
 func startSales() {
 	menu.ClearConsole()
-
+	menu.CreateSale()
 }

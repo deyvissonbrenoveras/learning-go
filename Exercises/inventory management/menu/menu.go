@@ -4,7 +4,9 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"inventory-management/inventory"
 	"inventory-management/products"
+	sales "inventory-management/sale"
 	"os"
 	"strconv"
 	"strings"
@@ -96,6 +98,68 @@ func ReadProductId() (id string, err error) {
 	}
 	ClearConsole()
 	return id, nil
+}
+
+func CreateSale() (sales.Sale, error) {
+	PrintSeparator()
+	newSale := sales.Sale{}
+create_sale_loop:
+	for {
+
+		fmt.Println(saleText)
+		selectedOption, _ := getMenuOptionFromUser()
+
+		switch selectedOption {
+		case 1:
+			product, quantitySelected, _ := addProduct()
+			fmt.Printf("%v+ %d", product, quantitySelected)
+		case 2:
+			// encerrar venda
+		case 3:
+			// cancelar
+			ClearConsole()
+			break create_sale_loop
+		}
+
+		break
+	}
+	return newSale, nil
+}
+
+func addProduct() (products.Product, int, error) {
+	fmt.Println("type the product Id:")
+	input, err := readUserInput()
+
+	if err != nil {
+		fmt.Println(err)
+		return products.Product{}, 0, err
+	}
+
+	for _, prod := range inventory.GetAllProducts() {
+		if prod.Id == input {
+			fmt.Printf("Product selected: %+v\ntype product quantity:", prod)
+			input, err = readUserInput()
+
+			if err != nil {
+				fmt.Println(err)
+				return products.Product{}, 0, err
+			}
+			quantitySelected, err := strconv.ParseInt(input, 10, 32)
+
+			if err != nil {
+				fmt.Println(err)
+				return products.Product{}, 0, err
+			}
+
+			return prod, int(quantitySelected), nil
+		}
+	}
+
+	return products.Product{}, 0, fmt.Errorf("product with id %s not found", input)
+}
+
+func PrintSeparator() {
+	fmt.Println(strings.Repeat("-", 20))
 }
 
 func readUserInput() (string, error) {

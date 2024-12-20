@@ -9,3 +9,9 @@ var menuText = `1. Add Product
 7. Quit
 
 Choose an option: `
+
+var saleText = `Please, select an action:
+1. Add product to cart
+2. Finish sale
+3. Cancel sale
+`
